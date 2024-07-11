@@ -20,6 +20,9 @@ jobs:
       - name: Setup bun
         uses: oven-sh/setup-bun@v1
 
+      - name: Installing dependencies 📦
+        run: bun i
+
       - name: Linting code 🔧
         run: bun lint
 
