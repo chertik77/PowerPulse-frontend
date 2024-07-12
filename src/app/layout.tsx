@@ -16,7 +16,7 @@ const RootLayout = ({ children }: PropsWithChildren) => (
   <html lang='en'>
     <body
       className={`${roboto.className} bg-black text-base font-normal text-white tablet:text-md`}>
-      {children}
+      <main>{children}</main>
     </body>
   </html>
 )

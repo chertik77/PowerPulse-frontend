@@ -10,15 +10,6 @@ export default {
       padding: { DEFAULT: '20px', md: '32px', lg: '96px' },
       screens: { sm: '375px', md: '768px', lg: '1440px' }
     },
-    colors: {
-      black: '#040404',
-      white: '#EFEDE8',
-      orange: '#E6533C',
-      coral: '#EF8964',
-      beige: '#EFA082',
-      success: '#3CBF61',
-      error: '#D80027'
-    },
     fontSize: {
       sm: ['12px', { lineHeight: '1.5' }],
       base: ['14px', { lineHeight: '1.28' }],
@@ -27,7 +18,10 @@ export default {
       xl: ['20px', { lineHeight: '1.2' }],
       '2xl': ['24px', { lineHeight: '1.33' }],
       '3xl': ['32px', { lineHeight: '1.37', fontWeight: 700 }],
-      '4xl': ['38px', { lineHeight: '1.37', fontWeight: 700 }],
+      '4xl': [
+        '38px',
+        { lineHeight: '1.05', fontWeight: 500, letterSpacing: ' 0.38px' }
+      ],
       '5xl': [
         '48px',
         { lineHeight: '1.04', fontWeight: 700, letterSpacing: '-1px' }
@@ -46,6 +40,16 @@ export default {
       ]
     },
     extend: {
+      colors: {
+        black: '#040404',
+        gray: '#303030',
+        white: '#EFEDE8',
+        orange: '#E6533C',
+        coral: '#EF8964',
+        beige: '#EFA082',
+        success: '#3CBF61',
+        error: '#D80027'
+      },
       screens: {
         mobile: '375px',
         tablet: '768px',
