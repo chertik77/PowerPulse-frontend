@@ -1,9 +1,12 @@
+'use client'
+
 import type { InputHTMLAttributes } from 'react'
 
 import { useState } from 'react'
-import { cn } from '@/lib/utils'
 import { ErrorMessage } from '@hookform/error-message'
 import { useFormContext } from 'react-hook-form'
+
+import { cn } from '@/lib/utils'
 
 import { Icon } from './Icon'
 

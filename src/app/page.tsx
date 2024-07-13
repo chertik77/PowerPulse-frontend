@@ -1,6 +1,8 @@
 import Link from 'next/link'
+
 import { MainLayout } from '@/components/MainLayout'
-import { Icon } from '@/components/ui/Icon'
+import { Icon } from '@/components/ui'
+
 import { Pages } from '@/config'
 
 const HomePage = () => {

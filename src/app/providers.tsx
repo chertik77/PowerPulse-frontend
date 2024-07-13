@@ -1,5 +1,6 @@
 'use client'
 
+import type { AxiosError } from 'axios'
 import type { PropsWithChildren } from 'react'
 
 import {
@@ -26,13 +27,19 @@ const getQueryClient = () => {
   }
 }
 
+declare module '@tanstack/react-query' {
+  interface Register {
+    defaultError: AxiosError
+  }
+}
+
 export const Providers = ({ children }: PropsWithChildren) => {
   const queryClient = getQueryClient()
 
   return (
     <QueryClientProvider client={queryClient}>
       {children}
-      <ToastContainer />
+      <ToastContainer position='top-right' />
     </QueryClientProvider>
   )
 }

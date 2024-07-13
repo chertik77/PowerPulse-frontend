@@ -1,9 +1,10 @@
 import type { PropsWithChildren } from 'react'
 
 import Link from 'next/link'
+
 import { Pages } from '@/config'
 
-import { Icon } from './ui/Icon'
+import { Icon } from './ui'
 
 export const MainLayout = ({ children }: PropsWithChildren) => (
   <div className='welcome-layout h-dvh'>
