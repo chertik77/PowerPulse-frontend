@@ -44,12 +44,12 @@ export const PasswordField = ({
           onClick={() => setShowPassword(prev => !prev)}>
           {showPassword ? (
             <Icon
-              name='settings'
+              name='eye-off'
               className='size-4'
             />
           ) : (
             <Icon
-              name='eye-off'
+              name='eye'
               className='size-4'
             />
           )}
