@@ -23,6 +23,7 @@ export const SigninForm = () => {
         className='tablet:w-[364px]'
         onSubmit={methods.handleSubmit(data => mutate(data))}>
         <Field
+          autoFocus
           inputName='email'
           className='mb-[18px] tablet:mb-5'
         />
