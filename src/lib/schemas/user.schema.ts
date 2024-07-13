@@ -6,10 +6,7 @@ export const SigninSchema = z.object({
 })
 
 export const SignupSchema = SigninSchema.extend({
-  name: z
-    .string()
-    .trim()
-    .min(2, { message: 'Please enter at least 2 characters.' })
+  name: z.string().trim().min(2, 'Please enter at least 2 characters.')
 })
 
 export type SigninSchema = z.infer<typeof SigninSchema>

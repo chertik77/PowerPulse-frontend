@@ -4,12 +4,12 @@
 
 .welcome-layout {
   background-repeat: no-repeat;
-  background-position: bottom;
-  background-size: contain;
+  background-position: right bottom;
+  background-size: 78%;
   background-image: image-set('/welcome.avif' 1x, '/welcome@2x.avif' 2x);
 
   @media (width >= 768px) {
-    background-position: right bottom;
+    background-size: 43%;
     background-image: image-set(
       '/welcome-tablet.avif' 1x,
       '/welcome-tablet@2x.avif' 2x
@@ -17,6 +17,7 @@
   }
 
   @media (width >= 1440px) {
+    background-size: contain;
     background-image: image-set(
       '/welcome-desktop.avif' 1x,
       '/welcome-desktop@2x.avif' 2x

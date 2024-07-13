@@ -5,6 +5,8 @@ import { Roboto } from 'next/font/google'
 
 import './globals.css'
 
+import { Providers } from './providers'
+
 const roboto = Roboto({ subsets: ['latin'], weight: ['400', '500', '700'] })
 
 export const metadata: Metadata = {
@@ -16,7 +18,9 @@ const RootLayout = ({ children }: PropsWithChildren) => (
   <html lang='en'>
     <body
       className={`${roboto.className} bg-black text-base font-normal text-white tablet:text-md`}>
-      <main>{children}</main>
+      <main>
+        <Providers>{children}</Providers>
+      </main>
     </body>
   </html>
 )
