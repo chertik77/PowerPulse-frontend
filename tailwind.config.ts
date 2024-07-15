@@ -40,6 +40,9 @@ export default {
       ]
     },
     extend: {
+      boxShadow: {
+        'multistep-form-highligted': '0px 1px 10px 0px rgba(230, 83, 60, 0.80)'
+      },
       colors: {
         black: '#040404',
         gray: '#303030',

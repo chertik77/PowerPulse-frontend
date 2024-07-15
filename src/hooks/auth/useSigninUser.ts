@@ -15,7 +15,7 @@ export const useSigninUser = (reset: UseFormReset<SigninSchema>) => {
     mutationKey: ['signin'],
     mutationFn: authService.signin,
     onSuccess() {
-      replace(Pages.Dashboard)
+      replace(Pages.DailyNorm)
       reset()
     },
     onError(e) {
