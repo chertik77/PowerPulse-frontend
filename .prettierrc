@@ -18,6 +18,8 @@
     "^(react|next)(/.*)?$",
     "<THIRD_PARTY_MODULES>",
     "",
+    "^@/app(/.*)?$",
+    "",
     "^@/features(/.*)?$",
     "",
     "^@/entities(/.*)?$",
