@@ -20,7 +20,7 @@ export const RootLayout = ({ children }: PropsWithChildren) => (
   <html lang='en'>
     <body
       className={`${roboto.variable} tablet:text-md bg-black text-base
-        font-normal text-white antialiased`}>
+        font-normal text-white`}>
       <main>{children}</main>
     </body>
   </html>

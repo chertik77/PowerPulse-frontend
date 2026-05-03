@@ -1,9 +1,9 @@
-export default function Home() {
-  return (
-    <div
-      className='flex flex-1 flex-col items-center justify-center bg-zinc-50
-        font-sans dark:bg-black'>
-      hello
-    </div>
-  )
-}
+import { Button } from '@/shared/ui'
+
+const Home = () => (
+  <div className='h-dvh'>
+    <Button variant='secondary'>Sign In</Button>
+  </div>
+)
+
+export default Home
