@@ -45,7 +45,6 @@
         "prettier-plugin-tailwindcss": "^0.8.0",
         "steiger": "^0.5.11",
         "tailwindcss": "^4.2.4",
-        "tsc-files": "^1.1.4",
         "typescript": "^6.0.3",
       },
     },
@@ -1524,8 +1523,6 @@
     "ts-log": ["ts-log@3.0.2", "", {}, "sha512-esq6hx2lM66sQV1YcFkIYTqrWWabmqBqobKHyn1CswdI5FgfQhkmiKiRWVGBNlIbdjBxEIkNvMIwLKKPgRYZLQ=="],
 
     "ts-pattern": ["ts-pattern@5.9.0", "", {}, "sha512-6s5V71mX8qBUmlgbrfL33xDUwO0fq48rxAu2LBE11WBeGdpCPOsXksQbZJHvHwhrd3QjUusd3mAOM5Gg0mFBLg=="],
-
-    "tsc-files": ["tsc-files@1.1.4", "", { "peerDependencies": { "typescript": ">=3" }, "bin": { "tsc-files": "cli.js" } }, "sha512-RePsRsOLru3BPpnf237y1Xe1oCGta8rmSYzM76kYo5tLGsv5R2r3s64yapYorGTPuuLyfS9NVbh9ydzmvNie2w=="],
 
     "tsconfck": ["tsconfck@3.1.6", "", { "peerDependencies": { "typescript": "^5.0.0" }, "optionalPeers": ["typescript"], "bin": { "tsconfck": "bin/tsconfck.js" } }, "sha512-ks6Vjr/jEw0P1gmOVwutM3B7fWxoWBL2KRDb1JfqGVawBmO5UsvmWOQFGHBPl5yxYz4eERr19E6L7NMv+Fej4w=="],
 

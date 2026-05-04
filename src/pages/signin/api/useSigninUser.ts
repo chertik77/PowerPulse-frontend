@@ -10,13 +10,14 @@ export const useSigninUser = () => {
   // const router = useRouter()
   const [{ fetching, error }, signin] = useMutation(SigninDocument)
 
+  console.log(error?.graphQLErrors)
   // useEffect(() => {
   //   if (data) router.push('/daily-intake')
   // }, [data, router])
 
   useEffect(() => {
     if (error) {
-      if (getGraphQLErrorCode(error) === 401) {
+      if (getGraphQLErrorCode(error) === 'UNAUTHENTICATED') {
         toast.error('The email or password is incorrect. Please try again.', {
           richColors: true
         })

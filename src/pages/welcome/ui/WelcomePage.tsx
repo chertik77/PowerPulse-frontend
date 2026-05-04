@@ -20,14 +20,16 @@ export const WelcomePage = () => (
     <Button
       render={<Link href='/signup' />}
       nativeButton={false}
-      className='tablet:mr-5 tablet:px-15 tablet:py-4 mr-3.5 px-10 py-3'>
+      className='tablet:mr-5 tablet:px-15 tablet:py-4 mr-3.5 inline-block px-10
+        py-3'>
       Sign Up
     </Button>
     <Button
       render={<Link href='/signin' />}
       variant='secondary'
       nativeButton={false}
-      className='tablet:mr-5 tablet:px-15 tablet:py-4 mr-3.5 px-10 py-3'>
+      className='tablet:mr-5 tablet:px-15 tablet:py-4 mr-3.5 inline-block px-10
+        py-3'>
       Sign In
     </Button>
   </AuthLayout>

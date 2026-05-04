@@ -14,7 +14,7 @@ export const useSignupUser = (setError: UseFormSetError<SignupSchema>) => {
 
   useEffect(() => {
     if (error) {
-      if (getGraphQLErrorCode(error) === 409) {
+      if (getGraphQLErrorCode(error) === 'CONFLICT') {
         setError(
           'email',
           { message: 'A user with this email already exists.' },
