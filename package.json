@@ -3,7 +3,7 @@
   "private": true,
   "scripts": {
     "dev": "next dev -p 4000",
-    "build": "bun run graphql:generate && next build",
+    "build": "next build",
     "start": "next start",
     "format": "prettier --write ./src",
     "format:check": "prettier --check ./src",
