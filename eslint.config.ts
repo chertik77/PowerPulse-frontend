@@ -35,6 +35,7 @@ const eslintConfig = defineConfig([
         }
       ],
       'newline-before-return': 'error',
+      'no-redeclare': 'off',
       'arrow-body-style': ['warn', 'as-needed'],
       '@typescript-eslint/consistent-type-imports': 'error',
       '@typescript-eslint/no-import-type-side-effects': 'error',
@@ -53,8 +54,11 @@ const eslintConfig = defineConfig([
           }
         }
       ],
+      '@eslint-react/no-array-index-key': 'off',
+      '@eslint-react/jsx-no-children-prop': 'off',
       'react/react-in-jsx-scope': 'off',
       'react/display-name': 'off',
+      'react/no-children-prop': 'off',
       'react/jsx-no-useless-fragment': 'error',
       'react/boolean-prop-naming': [
         'error',

@@ -3,6 +3,8 @@ import type { PropsWithChildren } from 'react'
 
 import { Roboto } from 'next/font/google'
 
+import { Providers } from '@/app/providers'
+
 import '@/app/styles/globals.css'
 
 const roboto = Roboto({
@@ -21,7 +23,9 @@ export const RootLayout = ({ children }: PropsWithChildren) => (
     <body
       className={`${roboto.variable} tablet:text-md bg-black text-base
         font-normal text-white`}>
-      <main>{children}</main>
+      <main>
+        <Providers>{children}</Providers>
+      </main>
     </body>
   </html>
 )
