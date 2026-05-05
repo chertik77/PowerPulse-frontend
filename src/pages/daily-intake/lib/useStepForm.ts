@@ -1,6 +1,6 @@
 import type { GenericSchema } from 'valibot'
 
-import useFormPersist from 'react-hook-form-persist'
+import { useFormPersist } from '@liorpo/react-hook-form-persist'
 import { parse } from 'valibot'
 
 import { useAppForm } from '@/shared/lib'
@@ -30,16 +30,18 @@ export const useStepForm = () => {
     mode: 'onSubmit'
   })
 
-  useFormPersist('daily-intake', {
-    watch: form.watch,
-    setValue: form.setValue,
-    storage: typeof window !== 'undefined' ? window.localStorage : undefined
+  const { clear } = useFormPersist('daily-intake', {
+    control: form.control,
+    setValue: form.setValue
   })
 
   const onSubmit = (data: DailyIntakeSchema) => {
     if (!stepper.state.isLast) return stepper.navigation.next()
 
-    calculateDailyIntake({ input: parse(DailyIntakeSchema, data) })
+    calculateDailyIntake(
+      { input: parse(DailyIntakeSchema, data) },
+      { onSuccess: clear }
+    )
   }
 
   return { form, onSubmit, isLoading }
