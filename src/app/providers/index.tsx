@@ -2,12 +2,12 @@
 
 import type { PropsWithChildren } from 'react'
 
+import { QueryClientProvider } from './QueryClientProvider'
 import { ToastProvider } from './ToastProvider'
-import { UrqlProvider } from './UrqlProvider'
 
 export const Providers = ({ children }: PropsWithChildren) => (
-  <UrqlProvider>
+  <QueryClientProvider>
     {children}
     <ToastProvider />
-  </UrqlProvider>
+  </QueryClientProvider>
 )

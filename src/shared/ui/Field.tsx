@@ -1,41 +1,84 @@
+import type { VariantProps } from 'class-variance-authority'
 import type { ComponentProps } from 'react'
 
 import { useMemo } from 'react'
+import { cva } from 'class-variance-authority'
 
 import { cn } from '../lib'
 
 const FieldGroup = ({ className, ...props }: ComponentProps<'div'>) => (
   <div
-    className={cn('tablet:gap-5 flex w-full flex-col gap-4.5', className)}
-    {...props}
-  />
-)
-
-type FieldProps = ComponentProps<'div'> & {
-  orientation?: 'vertical' | 'horizontal'
-}
-
-const Field = ({
-  className,
-  orientation = 'vertical',
-  ...props
-}: FieldProps) => (
-  <div
-    role='group'
-    data-orientation={orientation}
+    data-slot='field-group'
     className={cn(
-      'flex w-full gap-2',
-      orientation === 'vertical' && 'flex-col',
-      orientation === 'horizontal' && 'flex-row items-center',
+      `tablet:gap-5 group/field-group @container/field-group flex w-full
+      flex-col gap-4.5`,
       className
     )}
     {...props}
   />
 )
 
+const FieldSet = ({ className, ...props }: ComponentProps<'fieldset'>) => (
+  <fieldset
+    data-slot='field-set'
+    className={cn(
+      'flex flex-col gap-4 has-[>[data-slot=radio-group]]:gap-3',
+      className
+    )}
+    {...props}
+  />
+)
+
+const FieldLegend = ({
+  className,
+  variant = 'legend',
+  ...props
+}: ComponentProps<'legend'> & { variant?: 'legend' | 'label' }) => (
+  <legend
+    data-variant={variant}
+    className={cn('tablet:text-md mb-4 text-base', className)}
+    {...props}
+  />
+)
+
+const fieldVariants = cva(
+  'group/field flex w-full gap-2 data-[invalid=true]:text-red text-white',
+  {
+    variants: {
+      orientation: {
+        vertical: 'flex-col *:w-full [&>.sr-only]:w-auto',
+        horizontal: 'flex-row items-center *:data-[slot=field-label]:flex-auto'
+      }
+    },
+    defaultVariants: {
+      orientation: 'vertical'
+    }
+  }
+)
+
+const Field = ({
+  className,
+  orientation = 'vertical',
+  ...props
+}: ComponentProps<'div'> & VariantProps<typeof fieldVariants>) => (
+  <div
+    role='group'
+    data-slot='field'
+    data-orientation={orientation}
+    className={cn(fieldVariants({ orientation }), className)}
+    {...props}
+  />
+)
+
 const FieldLabel = ({ className, ...props }: ComponentProps<'label'>) => (
   <label
-    className={cn('tablet:text-base text-sm text-white/50', className)}
+    data-slot='field-label'
+    className={cn(
+      `tablet:text-base group/field-label peer/field-label flex w-fit gap-2
+      text-sm text-white/50 group-data-[disabled=true]/field:opacity-50
+      has-[>[data-slot=field]]:w-full has-[>[data-slot=field]]:flex-col`,
+      className
+    )}
     {...props}
   />
 )
@@ -80,6 +123,7 @@ const FieldError = ({
   return (
     <div
       role='alert'
+      data-slot='field-error'
       className={cn('text-red ml-2', className)}
       {...props}>
       {content}
@@ -87,4 +131,4 @@ const FieldError = ({
   )
 }
 
-export { Field, FieldLabel, FieldError, FieldGroup }
+export { Field, FieldSet, FieldLegend, FieldLabel, FieldError, FieldGroup }

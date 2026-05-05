@@ -1,34 +1,31 @@
-import { useEffect } from 'react'
-import { toast } from 'sonner'
-import { useMutation } from 'urql'
+import type { SigninMutationVariables } from '@/shared/api'
 
-import { getGraphQLErrorCode } from '@/shared/lib'
+import { useRouter } from 'next/navigation'
+import { useMutation } from '@tanstack/react-query'
+
+import { graphQLClient } from '@/shared/api'
 
 import { SigninDocument } from './signin-document'
 
 export const useSigninUser = () => {
-  // const router = useRouter()
-  const [{ fetching, error }, signin] = useMutation(SigninDocument)
+  const { push } = useRouter()
 
-  console.log(error?.graphQLErrors)
-  // useEffect(() => {
-  //   if (data) router.push('/daily-intake')
-  // }, [data, router])
-
-  useEffect(() => {
-    if (error) {
-      if (getGraphQLErrorCode(error) === 'UNAUTHENTICATED') {
-        toast.error('The email or password is incorrect. Please try again.', {
-          richColors: true
-        })
-      } else {
-        toast.error(
-          'An error occurred while signing in. Please try again later.',
-          { richColors: true }
-        )
-      }
+  const { mutate, isPending } = useMutation({
+    mutationFn: async (input: SigninMutationVariables) =>
+      graphQLClient.request(SigninDocument, input),
+    meta: {
+      errorMessage: e =>
+        e?.response.status === 401
+          ? 'The email or password you entered is incorrect. Please try again.'
+          : 'An error occurred while signing in. Please try again later.'
+    },
+    onSuccess: () => {
+      push('/daily-intake')
+    },
+    onError: e => {
+      console.log(e)
     }
-  }, [error])
+  })
 
-  return { signin, isLoading: fetching }
+  return { signin: mutate, isLoading: isPending }
 }

@@ -1,9 +1,7 @@
-import { AuthLayout } from '@/shared/layouts'
-
 import { SignupForm } from './SignupForm'
 
 export const SignupPage = () => (
-  <AuthLayout>
+  <>
     <h2 className='tablet:mb-4 tablet:text-3xl mb-3.5 text-2xl font-bold'>
       Sign Up
     </h2>
@@ -14,5 +12,5 @@ export const SignupPage = () => (
       process, please provide us with the following information.
     </p>
     <SignupForm />
-  </AuthLayout>
+  </>
 )

@@ -1,7 +1,6 @@
-import { cacheExchange, Client, fetchExchange } from 'urql'
+import { GraphQLClient } from 'graphql-request'
 
-export const graphQLClient = new Client({
-  url: process.env.GRAPHQL_BASE_URL!,
-  fetchOptions: { credentials: 'include' },
-  exchanges: [cacheExchange, fetchExchange]
+export const graphQLClient = new GraphQLClient(process.env.GRAPHQL_BASE_URL!, {
+  credentials: 'include',
+  next: { revalidate: 60 }
 })

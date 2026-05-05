@@ -1,9 +1,7 @@
-import { AuthLayout } from '@/shared/layouts'
-
 import { SigninForm } from './SigninForm'
 
 export const SigninPage = () => (
-  <AuthLayout>
+  <>
     <h2 className='tablet:mb-4 tablet:text-3xl mb-3.5 text-2xl font-bold'>
       Sign In
     </h2>
@@ -11,5 +9,5 @@ export const SigninPage = () => (
       Welcome! Please enter your credentials to login to the platform:
     </p>
     <SigninForm />
-  </AuthLayout>
+  </>
 )

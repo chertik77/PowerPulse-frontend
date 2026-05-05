@@ -7,11 +7,11 @@ import { valibotResolver } from '@hookform/resolvers/valibot'
 import { useForm } from 'react-hook-form'
 
 export const useAppForm = <S extends GenericSchema<FieldValues>>(
-  schema: S,
+  schema?: S,
   options?: UseFormProps<InferInput<S>>
 ) =>
   useForm<InferInput<S>>({
-    resolver: valibotResolver(schema),
-    mode: 'onChange',
+    resolver: schema ? valibotResolver(schema) : undefined,
+    mode: 'onBlur',
     ...options
   })

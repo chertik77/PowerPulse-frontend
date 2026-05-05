@@ -85,6 +85,12 @@ const eslintConfig = defineConfig([
       ],
       'react/self-closing-comp': ['warn', { component: true, html: true }]
     }
+  },
+  {
+    files: ['**/ambient/*.d.ts'],
+    rules: {
+      '@typescript-eslint/consistent-type-definitions': 'off'
+    }
   }
 ])
 

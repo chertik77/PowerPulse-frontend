@@ -39,7 +39,7 @@ export const SigninForm = () => {
                 placeholder='Email'
                 autoComplete='email'
               />
-              {fieldState.invalid && <FieldError errors={[fieldState.error]} />}
+              <FieldError errors={[fieldState.error]} />
             </Field>
           )}
         />
@@ -55,7 +55,7 @@ export const SigninForm = () => {
                 placeholder='Password'
                 autoComplete='new-password'
               />
-              {fieldState.invalid && <FieldError errors={[fieldState.error]} />}
+              <FieldError errors={[fieldState.error]} />
             </Field>
           )}
         />
@@ -69,7 +69,7 @@ export const SigninForm = () => {
       <p className='tablet:ml-2.5 text-sm text-white/60'>
         Don’t have an account?{' '}
         <Link
-          href='/signup'
+          href='/auth/signup'
           className='text-white underline'>
           Sign Up
         </Link>

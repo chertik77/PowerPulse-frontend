@@ -15,10 +15,13 @@ import * as types from './graphql'
  * Learn more about it here: https://the-guild.dev/graphql/codegen/plugins/presets/preset-client#reducing-bundle-size
  */
 type Documents = {
+  '\n  mutation calculateDailyIntake($input: CalculateDailyIntakeInput!) {\n    calculateDailyIntake(input: $input) {\n      dailyCalorieIntake\n      dailyExerciseTime\n    }\n  }\n': typeof types.CalculateDailyIntakeDocument
   '\n  mutation signin($input: SigninInput!) {\n    signin(input: $input)\n  }\n': typeof types.SigninDocument
   '\n  mutation signup($input: SignupInput!) {\n    signup(input: $input)\n  }\n': typeof types.SignupDocument
 }
 const documents: Documents = {
+  '\n  mutation calculateDailyIntake($input: CalculateDailyIntakeInput!) {\n    calculateDailyIntake(input: $input) {\n      dailyCalorieIntake\n      dailyExerciseTime\n    }\n  }\n':
+    types.CalculateDailyIntakeDocument,
   '\n  mutation signin($input: SigninInput!) {\n    signin(input: $input)\n  }\n':
     types.SigninDocument,
   '\n  mutation signup($input: SignupInput!) {\n    signup(input: $input)\n  }\n':
@@ -39,6 +42,12 @@ const documents: Documents = {
  */
 export function graphql(source: string): unknown
 
+/**
+ * The graphql function is used to parse GraphQL queries into a document that can be used by GraphQL clients.
+ */
+export function graphql(
+  source: '\n  mutation calculateDailyIntake($input: CalculateDailyIntakeInput!) {\n    calculateDailyIntake(input: $input) {\n      dailyCalorieIntake\n      dailyExerciseTime\n    }\n  }\n'
+): (typeof documents)['\n  mutation calculateDailyIntake($input: CalculateDailyIntakeInput!) {\n    calculateDailyIntake(input: $input) {\n      dailyCalorieIntake\n      dailyExerciseTime\n    }\n  }\n']
 /**
  * The graphql function is used to parse GraphQL queries into a document that can be used by GraphQL clients.
  */

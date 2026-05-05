@@ -1,20 +1,26 @@
+import type { SignupMutationVariables } from '@/shared/api'
 import type { UseFormSetError } from 'react-hook-form'
 import type { SignupSchema } from '../model/contract'
 
-import { useEffect } from 'react'
+import { useRouter } from 'next/navigation'
+import { useMutation } from '@tanstack/react-query'
 import { toast } from 'sonner'
-import { useMutation } from 'urql'
 
-import { getGraphQLErrorCode } from '@/shared/lib'
+import { graphQLClient } from '@/shared/api'
 
 import { SignupDocument } from './signup-document'
 
 export const useSignupUser = (setError: UseFormSetError<SignupSchema>) => {
-  const [{ fetching, error }, signup] = useMutation(SignupDocument)
+  const { push } = useRouter()
 
-  useEffect(() => {
-    if (error) {
-      if (getGraphQLErrorCode(error) === 'CONFLICT') {
+  const { mutate, isPending } = useMutation({
+    mutationFn: (input: SignupMutationVariables) =>
+      graphQLClient.request(SignupDocument, input),
+    onSuccess: () => {
+      push('/daily-intake')
+    },
+    onError: error => {
+      if (error.response.status === 409) {
         setError(
           'email',
           { message: 'A user with this email already exists.' },
@@ -27,7 +33,7 @@ export const useSignupUser = (setError: UseFormSetError<SignupSchema>) => {
         { richColors: true }
       )
     }
-  }, [error, setError])
+  })
 
-  return { signup, isLoading: fetching }
+  return { signup: mutate, isLoading: isPending }
 }

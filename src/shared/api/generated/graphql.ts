@@ -10,6 +10,20 @@ export type Incremental<T> =
       [P in keyof T]?: P extends ' $fragmentName' | '__typename' ? T[P] : never
     }
 
+export type Blood = 'A' | 'AB' | 'B' | 'O'
+
+export type CalculateDailyIntakeInput = {
+  activityLevel: number
+  birthday: unknown
+  blood: Blood
+  currentWeight: number
+  desiredWeight: number
+  height: number
+  sex: Sex
+}
+
+export type Sex = 'female' | 'male'
+
 export type SigninInput = {
   email: string
   password: string
@@ -19,6 +33,17 @@ export type SignupInput = {
   email: string
   name: string
   password: string
+}
+
+export type CalculateDailyIntakeMutationVariables = Exact<{
+  input: CalculateDailyIntakeInput
+}>
+
+export type CalculateDailyIntakeMutation = {
+  calculateDailyIntake: {
+    dailyCalorieIntake: number
+    dailyExerciseTime: number
+  }
 }
 
 export type SigninMutationVariables = Exact<{
@@ -33,6 +58,67 @@ export type SignupMutationVariables = Exact<{
 
 export type SignupMutation = { signup: boolean }
 
+export const CalculateDailyIntakeDocument = {
+  kind: 'Document',
+  definitions: [
+    {
+      kind: 'OperationDefinition',
+      operation: 'mutation',
+      name: { kind: 'Name', value: 'calculateDailyIntake' },
+      variableDefinitions: [
+        {
+          kind: 'VariableDefinition',
+          variable: {
+            kind: 'Variable',
+            name: { kind: 'Name', value: 'input' }
+          },
+          type: {
+            kind: 'NonNullType',
+            type: {
+              kind: 'NamedType',
+              name: { kind: 'Name', value: 'CalculateDailyIntakeInput' }
+            }
+          }
+        }
+      ],
+      selectionSet: {
+        kind: 'SelectionSet',
+        selections: [
+          {
+            kind: 'Field',
+            name: { kind: 'Name', value: 'calculateDailyIntake' },
+            arguments: [
+              {
+                kind: 'Argument',
+                name: { kind: 'Name', value: 'input' },
+                value: {
+                  kind: 'Variable',
+                  name: { kind: 'Name', value: 'input' }
+                }
+              }
+            ],
+            selectionSet: {
+              kind: 'SelectionSet',
+              selections: [
+                {
+                  kind: 'Field',
+                  name: { kind: 'Name', value: 'dailyCalorieIntake' }
+                },
+                {
+                  kind: 'Field',
+                  name: { kind: 'Name', value: 'dailyExerciseTime' }
+                }
+              ]
+            }
+          }
+        ]
+      }
+    }
+  ]
+} as unknown as DocumentNode<
+  CalculateDailyIntakeMutation,
+  CalculateDailyIntakeMutationVariables
+>
 export const SigninDocument = {
   kind: 'Document',
   definitions: [
