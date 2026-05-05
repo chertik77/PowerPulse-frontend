@@ -7,6 +7,7 @@ import { useMutation } from '@tanstack/react-query'
 import { toast } from 'sonner'
 
 import { graphQLClient } from '@/shared/api'
+import { getGraphQLStatusCode } from '@/shared/lib'
 
 import { SignupDocument } from './signup-document'
 
@@ -19,19 +20,19 @@ export const useSignupUser = (setError: UseFormSetError<SignupSchema>) => {
     onSuccess: () => {
       push('/daily-intake')
     },
-    onError: error => {
-      if (error.response.status === 409) {
+    onError: e => {
+      if (getGraphQLStatusCode(e) === 409) {
         setError(
           'email',
           { message: 'A user with this email already exists.' },
           { shouldFocus: true }
         )
+      } else {
+        toast.error(
+          'An error occurred while signing up. Please try again later.',
+          { richColors: true }
+        )
       }
-
-      toast.error(
-        'An error occurred while signing up. Please try again later.',
-        { richColors: true }
-      )
     }
   })
 

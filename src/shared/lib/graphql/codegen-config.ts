@@ -6,7 +6,7 @@ loadEnvConfig(process.cwd())
 
 export default {
   schema: process.env.GRAPHQL_BASE_URL,
-  documents: ['src/**/*.{ts,tsx}', 'src/**/*.gql'],
+  documents: ['src/**/*.{ts,tsx}'],
   ignoreNoDocuments: true,
   generates: {
     'src/shared/api/generated/': {

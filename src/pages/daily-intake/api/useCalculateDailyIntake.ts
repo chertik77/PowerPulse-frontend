@@ -6,6 +6,7 @@ import { useMutation } from '@tanstack/react-query'
 import { graphQLClient } from '@/shared/api'
 
 import { DailyIntakeDocumet } from './daily-intake-document'
+import { RefreshTokensDocument } from './refresh-tokens-document'
 
 export const useCalculateDailyIntake = () => {
   const { push } = useRouter()
@@ -17,7 +18,8 @@ export const useCalculateDailyIntake = () => {
       errorMessage:
         'An error occurred while calculating daily intake. Please try again later.'
     },
-    onSuccess: () => {
+    onSuccess: async () => {
+      await graphQLClient.request(RefreshTokensDocument)
       push('/app')
     }
   })

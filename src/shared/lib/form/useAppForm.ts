@@ -12,6 +12,6 @@ export const useAppForm = <S extends GenericSchema<FieldValues>>(
 ) =>
   useForm<InferInput<S>>({
     resolver: schema ? valibotResolver(schema) : undefined,
-    mode: 'onBlur',
+    mode: 'onSubmit',
     ...options
   })

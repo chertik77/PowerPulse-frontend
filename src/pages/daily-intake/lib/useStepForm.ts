@@ -27,7 +27,7 @@ export const useStepForm = () => {
       blood: 'A',
       sex: 'male'
     },
-    mode: 'onSubmit'
+    mode: 'onBlur'
   })
 
   const { clear } = useFormPersist('daily-intake', {

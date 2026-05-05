@@ -46,6 +46,10 @@ export type CalculateDailyIntakeMutation = {
   }
 }
 
+export type RefreshTokensMutationVariables = Exact<{ [key: string]: never }>
+
+export type RefreshTokensMutation = { refreshTokens: boolean }
+
 export type SigninMutationVariables = Exact<{
   input: SigninInput
 }>
@@ -118,6 +122,25 @@ export const CalculateDailyIntakeDocument = {
 } as unknown as DocumentNode<
   CalculateDailyIntakeMutation,
   CalculateDailyIntakeMutationVariables
+>
+export const RefreshTokensDocument = {
+  kind: 'Document',
+  definitions: [
+    {
+      kind: 'OperationDefinition',
+      operation: 'mutation',
+      name: { kind: 'Name', value: 'refreshTokens' },
+      selectionSet: {
+        kind: 'SelectionSet',
+        selections: [
+          { kind: 'Field', name: { kind: 'Name', value: 'refreshTokens' } }
+        ]
+      }
+    }
+  ]
+} as unknown as DocumentNode<
+  RefreshTokensMutation,
+  RefreshTokensMutationVariables
 >
 export const SigninDocument = {
   kind: 'Document',

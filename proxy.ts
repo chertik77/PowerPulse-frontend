@@ -9,8 +9,6 @@ export const proxy = async (req: NextRequest) => {
 
   const token = req.cookies.get('accessToken')?.value
 
-  console.log(token)
-
   const payload = await verifyToken(token)
 
   const isAuth = pathname.startsWith('/auth')

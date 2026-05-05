@@ -124,7 +124,7 @@ const FieldError = ({
     <div
       role='alert'
       data-slot='field-error'
-      className={cn('text-red ml-2', className)}
+      className={cn('text-red ml-1', className)}
       {...props}>
       {content}
     </div>
