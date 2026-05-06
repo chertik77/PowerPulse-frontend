@@ -38,10 +38,10 @@ export const useStepForm = () => {
   const onSubmit = (data: DailyIntakeSchema) => {
     if (!stepper.state.isLast) return stepper.navigation.next()
 
-    calculateDailyIntake(
-      { input: parse(DailyIntakeSchema, data) },
-      { onSuccess: clear }
-    )
+    calculateDailyIntake({
+      variables: { input: parse(DailyIntakeSchema, data) },
+      onCompleted: clear
+    })
   }
 
   return { form, onSubmit, isLoading }

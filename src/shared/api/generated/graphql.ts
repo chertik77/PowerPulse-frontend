@@ -35,6 +35,10 @@ export type SignupInput = {
   password: string
 }
 
+export type MeQueryVariables = Exact<{ [key: string]: never }>
+
+export type MeQuery = { me: { id: string } }
+
 export type CalculateDailyIntakeMutationVariables = Exact<{
   input: CalculateDailyIntakeInput
 }>
@@ -62,6 +66,31 @@ export type SignupMutationVariables = Exact<{
 
 export type SignupMutation = { signup: boolean }
 
+export const MeDocument = {
+  kind: 'Document',
+  definitions: [
+    {
+      kind: 'OperationDefinition',
+      operation: 'query',
+      name: { kind: 'Name', value: 'me' },
+      selectionSet: {
+        kind: 'SelectionSet',
+        selections: [
+          {
+            kind: 'Field',
+            name: { kind: 'Name', value: 'me' },
+            selectionSet: {
+              kind: 'SelectionSet',
+              selections: [
+                { kind: 'Field', name: { kind: 'Name', value: 'id' } }
+              ]
+            }
+          }
+        ]
+      }
+    }
+  ]
+} as unknown as DocumentNode<MeQuery, MeQueryVariables>
 export const CalculateDailyIntakeDocument = {
   kind: 'Document',
   definitions: [

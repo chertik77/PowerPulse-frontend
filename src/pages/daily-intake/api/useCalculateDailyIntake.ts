@@ -1,9 +1,8 @@
-import type { CalculateDailyIntakeMutationVariables } from '@/shared/api'
-
 import { useRouter } from 'next/navigation'
-import { useMutation } from '@tanstack/react-query'
+import { useMutation } from '@apollo/client/react'
+import { toast } from 'sonner'
 
-import { graphQLClient } from '@/shared/api'
+import { apolloClient } from '@/shared/api/client'
 
 import { DailyIntakeDocumet } from './daily-intake-document'
 import { RefreshTokensDocument } from './refresh-tokens-document'
@@ -11,18 +10,18 @@ import { RefreshTokensDocument } from './refresh-tokens-document'
 export const useCalculateDailyIntake = () => {
   const { push } = useRouter()
 
-  const { mutate: calculateDailyIntake, isPending } = useMutation({
-    mutationFn: (input: CalculateDailyIntakeMutationVariables) =>
-      graphQLClient.request(DailyIntakeDocumet, input),
-    meta: {
-      errorMessage:
-        'An error occurred while calculating daily intake. Please try again later.'
-    },
-    onSuccess: async () => {
-      await graphQLClient.request(RefreshTokensDocument)
+  const [mutate, { loading }] = useMutation(DailyIntakeDocumet, {
+    onCompleted: async () => {
+      await apolloClient.mutate({ mutation: RefreshTokensDocument })
       push('/app')
+    },
+    onError() {
+      toast.error(
+        'The email or password you entered is incorrect. Please try again.',
+        { richColors: true }
+      )
     }
   })
 
-  return { calculateDailyIntake, isLoading: isPending }
+  return { calculateDailyIntake: mutate, isLoading: loading }
 }

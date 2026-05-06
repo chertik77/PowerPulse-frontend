@@ -1,6 +1,5 @@
 import eslintPluginReactModern from '@eslint-react/eslint-plugin'
 import eslintPluginJs from '@eslint/js'
-import eslintPluginQuery from '@tanstack/eslint-plugin-query'
 import eslintConfigNextVitals from 'eslint-config-next/core-web-vitals'
 import eslintConfigNextTs from 'eslint-config-next/typescript'
 import { defineConfig, globalIgnores } from 'eslint/config'
@@ -11,7 +10,6 @@ const eslintConfig = defineConfig([
   ...eslintConfigNextVitals,
   eslintPluginJs.configs.recommended,
   eslintPluginReactModern.configs.recommended,
-  ...eslintPluginQuery.configs['flat/recommended'],
   { languageOptions: { parser: eslintTypescript.parser } },
   globalIgnores(['.next/**', 'out/**', 'build/**', 'next-env.d.ts']),
   {

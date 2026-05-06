@@ -24,7 +24,10 @@ export const SigninForm = () => {
   const { signin, isLoading } = useSigninUser()
 
   return (
-    <form onSubmit={form.handleSubmit(data => signin({ input: data }))}>
+    <form
+      onSubmit={form.handleSubmit(data =>
+        signin({ variables: { input: data } })
+      )}>
       <FieldGroup className='tablet:w-91 tablet:mb-16 mb-8'>
         <Controller
           name='email'

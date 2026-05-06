@@ -2,12 +2,12 @@
 
 import type { PropsWithChildren } from 'react'
 
-import { QueryClientProvider } from './QueryClientProvider'
+import { ApolloClientProvider } from './ApolloClientProvider'
 import { ToastProvider } from './ToastProvider'
 
 export const Providers = ({ children }: PropsWithChildren) => (
-  <QueryClientProvider>
+  <ApolloClientProvider>
     {children}
     <ToastProvider />
-  </QueryClientProvider>
+  </ApolloClientProvider>
 )

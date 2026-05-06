@@ -1,29 +1,35 @@
-import type { SigninMutationVariables } from '@/shared/api'
-
 import { useRouter } from 'next/navigation'
-import { useMutation } from '@tanstack/react-query'
+import { CombinedGraphQLErrors } from '@apollo/client/errors'
+import { useMutation } from '@apollo/client/react'
+import { toast } from 'sonner'
 
-import { graphQLClient } from '@/shared/api'
-import { getGraphQLStatusCode } from '@/shared/lib'
+import { getGraphQLErrorCode } from '@/shared/lib'
 
 import { SigninDocument } from './signin-document'
 
 export const useSigninUser = () => {
   const { push } = useRouter()
 
-  const { mutate, isPending } = useMutation({
-    mutationFn: (input: SigninMutationVariables) =>
-      graphQLClient.request(SigninDocument, input),
-    meta: {
-      errorMessage: e =>
-        getGraphQLStatusCode(e) === 401
-          ? 'The email or password you entered is incorrect. Please try again.'
-          : 'An error occurred while signing in. Please try again later.'
-    },
-    onSuccess: () => {
+  const [mutate, { loading }] = useMutation(SigninDocument, {
+    onCompleted() {
       push('/daily-intake')
+    },
+    onError(error) {
+      if (CombinedGraphQLErrors.is(error)) {
+        if (getGraphQLErrorCode(error) === 'UNAUTHENTICATED') {
+          toast.error(
+            'The email or password you entered is incorrect. Please try again.',
+            { richColors: true }
+          )
+        }
+      } else {
+        toast.error(
+          'An error occurred while signing in. Please try again later.',
+          { richColors: true }
+        )
+      }
     }
   })
 
-  return { signin: mutate, isLoading: isPending }
+  return { signin: mutate, isLoading: loading }
 }

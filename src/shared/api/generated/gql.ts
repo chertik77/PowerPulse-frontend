@@ -15,12 +15,14 @@ import * as types from './graphql'
  * Learn more about it here: https://the-guild.dev/graphql/codegen/plugins/presets/preset-client#reducing-bundle-size
  */
 type Documents = {
+  '\n  query me {\n    me {\n      id\n    }\n  }\n': typeof types.MeDocument
   '\n  mutation calculateDailyIntake($input: CalculateDailyIntakeInput!) {\n    calculateDailyIntake(input: $input) {\n      dailyCalorieIntake\n      dailyExerciseTime\n    }\n  }\n': typeof types.CalculateDailyIntakeDocument
   '\n  mutation refreshTokens {\n    refreshTokens\n  }\n': typeof types.RefreshTokensDocument
   '\n  mutation signin($input: SigninInput!) {\n    signin(input: $input)\n  }\n': typeof types.SigninDocument
   '\n  mutation signup($input: SignupInput!) {\n    signup(input: $input)\n  }\n': typeof types.SignupDocument
 }
 const documents: Documents = {
+  '\n  query me {\n    me {\n      id\n    }\n  }\n': types.MeDocument,
   '\n  mutation calculateDailyIntake($input: CalculateDailyIntakeInput!) {\n    calculateDailyIntake(input: $input) {\n      dailyCalorieIntake\n      dailyExerciseTime\n    }\n  }\n':
     types.CalculateDailyIntakeDocument,
   '\n  mutation refreshTokens {\n    refreshTokens\n  }\n':
@@ -45,6 +47,12 @@ const documents: Documents = {
  */
 export function graphql(source: string): unknown
 
+/**
+ * The graphql function is used to parse GraphQL queries into a document that can be used by GraphQL clients.
+ */
+export function graphql(
+  source: '\n  query me {\n    me {\n      id\n    }\n  }\n'
+): (typeof documents)['\n  query me {\n    me {\n      id\n    }\n  }\n']
 /**
  * The graphql function is used to parse GraphQL queries into a document that can be used by GraphQL clients.
  */

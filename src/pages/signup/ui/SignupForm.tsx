@@ -24,7 +24,10 @@ export const SignupForm = () => {
   const { signup, isLoading } = useSignupUser(form.setError)
 
   return (
-    <form onSubmit={form.handleSubmit(data => signup({ input: data }))}>
+    <form
+      onSubmit={form.handleSubmit(data =>
+        signup({ variables: { input: data } })
+      )}>
       <FieldGroup className='tablet:w-91 tablet:mb-16 mb-8'>
         <Controller
           name='name'
