@@ -2,14 +2,14 @@ import type { NextRequest } from 'next/server'
 
 import { NextResponse } from 'next/server'
 
-import { verifyToken } from '@/shared/lib'
+import { decodeToken } from '@/shared/lib'
 
 export const proxy = async (req: NextRequest) => {
   const { pathname } = req.nextUrl
 
   const token = req.cookies.get('accessToken')?.value
 
-  const payload = await verifyToken(token)
+  const payload = decodeToken(token)
 
   const isAuth = pathname.startsWith('/auth')
   const isApp = pathname.startsWith('/app')

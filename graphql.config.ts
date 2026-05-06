@@ -6,7 +6,7 @@ loadEnvConfig(process.cwd())
 
 const config: IGraphQLConfig = {
   schema: process.env.GRAPHQL_BASE_URL!,
-  documents: ['src/**/*.{ts,tsx}']
+  documents: ['src/**/*.{gql,graphql}']
 }
 
 export default config

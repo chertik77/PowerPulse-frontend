@@ -3,14 +3,14 @@ import { CombinedGraphQLErrors } from '@apollo/client/errors'
 import { useMutation } from '@apollo/client/react'
 import { toast } from 'sonner'
 
+import { SigninDocument } from '@/shared/api'
 import { getGraphQLErrorCode } from '@/shared/lib'
-
-import { SigninDocument } from './signin-document'
 
 export const useSigninUser = () => {
   const { push } = useRouter()
 
   const [mutate, { loading }] = useMutation(SigninDocument, {
+    context: { skipAuthRefresh: true },
     onCompleted() {
       push('/daily-intake')
     },

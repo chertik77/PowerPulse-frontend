@@ -16,8 +16,6 @@ export const useStepForm = () => {
     | GenericSchema<DailyIntakeSchema>
     | undefined
 
-  const { calculateDailyIntake, isLoading } = useCalculateDailyIntake()
-
   const form = useAppForm(schema, {
     defaultValues: {
       height: '',
@@ -35,12 +33,13 @@ export const useStepForm = () => {
     setValue: form.setValue
   })
 
+  const { calculateDailyIntake, isLoading } = useCalculateDailyIntake(clear)
+
   const onSubmit = (data: DailyIntakeSchema) => {
     if (!stepper.state.isLast) return stepper.navigation.next()
 
     calculateDailyIntake({
-      variables: { input: parse(DailyIntakeSchema, data) },
-      onCompleted: clear
+      variables: { input: parse(DailyIntakeSchema, data) }
     })
   }
 

@@ -6,9 +6,8 @@ import { CombinedGraphQLErrors } from '@apollo/client/errors'
 import { useMutation } from '@apollo/client/react'
 import { toast } from 'sonner'
 
+import { SignupDocument } from '@/shared/api'
 import { getGraphQLErrorCode } from '@/shared/lib'
-
-import { SignupDocument } from './signup-document'
 
 export const useSignupUser = (setError: UseFormSetError<SignupSchema>) => {
   const { push } = useRouter()

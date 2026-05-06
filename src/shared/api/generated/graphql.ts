@@ -35,9 +35,17 @@ export type SignupInput = {
   password: string
 }
 
-export type MeQueryVariables = Exact<{ [key: string]: never }>
+export type LogoutMutationVariables = Exact<{ [key: string]: never }>
 
-export type MeQuery = { me: { id: string } }
+export type LogoutMutation = { logout: boolean }
+
+export type RefreshTokensMutationVariables = Exact<{ [key: string]: never }>
+
+export type RefreshTokensMutation = { refreshTokens: boolean }
+
+export type GetUserQueryVariables = Exact<{ [key: string]: never }>
+
+export type GetUserQuery = { me: { email: string; id: string } }
 
 export type CalculateDailyIntakeMutationVariables = Exact<{
   input: CalculateDailyIntakeInput
@@ -49,10 +57,6 @@ export type CalculateDailyIntakeMutation = {
     dailyExerciseTime: number
   }
 }
-
-export type RefreshTokensMutationVariables = Exact<{ [key: string]: never }>
-
-export type RefreshTokensMutation = { refreshTokens: boolean }
 
 export type SigninMutationVariables = Exact<{
   input: SigninInput
@@ -66,13 +70,46 @@ export type SignupMutationVariables = Exact<{
 
 export type SignupMutation = { signup: boolean }
 
-export const MeDocument = {
+export const LogoutDocument = {
+  kind: 'Document',
+  definitions: [
+    {
+      kind: 'OperationDefinition',
+      operation: 'mutation',
+      name: { kind: 'Name', value: 'Logout' },
+      selectionSet: {
+        kind: 'SelectionSet',
+        selections: [{ kind: 'Field', name: { kind: 'Name', value: 'logout' } }]
+      }
+    }
+  ]
+} as unknown as DocumentNode<LogoutMutation, LogoutMutationVariables>
+export const RefreshTokensDocument = {
+  kind: 'Document',
+  definitions: [
+    {
+      kind: 'OperationDefinition',
+      operation: 'mutation',
+      name: { kind: 'Name', value: 'RefreshTokens' },
+      selectionSet: {
+        kind: 'SelectionSet',
+        selections: [
+          { kind: 'Field', name: { kind: 'Name', value: 'refreshTokens' } }
+        ]
+      }
+    }
+  ]
+} as unknown as DocumentNode<
+  RefreshTokensMutation,
+  RefreshTokensMutationVariables
+>
+export const GetUserDocument = {
   kind: 'Document',
   definitions: [
     {
       kind: 'OperationDefinition',
       operation: 'query',
-      name: { kind: 'Name', value: 'me' },
+      name: { kind: 'Name', value: 'GetUser' },
       selectionSet: {
         kind: 'SelectionSet',
         selections: [
@@ -82,6 +119,7 @@ export const MeDocument = {
             selectionSet: {
               kind: 'SelectionSet',
               selections: [
+                { kind: 'Field', name: { kind: 'Name', value: 'email' } },
                 { kind: 'Field', name: { kind: 'Name', value: 'id' } }
               ]
             }
@@ -90,14 +128,14 @@ export const MeDocument = {
       }
     }
   ]
-} as unknown as DocumentNode<MeQuery, MeQueryVariables>
+} as unknown as DocumentNode<GetUserQuery, GetUserQueryVariables>
 export const CalculateDailyIntakeDocument = {
   kind: 'Document',
   definitions: [
     {
       kind: 'OperationDefinition',
       operation: 'mutation',
-      name: { kind: 'Name', value: 'calculateDailyIntake' },
+      name: { kind: 'Name', value: 'CalculateDailyIntake' },
       variableDefinitions: [
         {
           kind: 'VariableDefinition',
@@ -152,32 +190,13 @@ export const CalculateDailyIntakeDocument = {
   CalculateDailyIntakeMutation,
   CalculateDailyIntakeMutationVariables
 >
-export const RefreshTokensDocument = {
-  kind: 'Document',
-  definitions: [
-    {
-      kind: 'OperationDefinition',
-      operation: 'mutation',
-      name: { kind: 'Name', value: 'refreshTokens' },
-      selectionSet: {
-        kind: 'SelectionSet',
-        selections: [
-          { kind: 'Field', name: { kind: 'Name', value: 'refreshTokens' } }
-        ]
-      }
-    }
-  ]
-} as unknown as DocumentNode<
-  RefreshTokensMutation,
-  RefreshTokensMutationVariables
->
 export const SigninDocument = {
   kind: 'Document',
   definitions: [
     {
       kind: 'OperationDefinition',
       operation: 'mutation',
-      name: { kind: 'Name', value: 'signin' },
+      name: { kind: 'Name', value: 'Signin' },
       variableDefinitions: [
         {
           kind: 'VariableDefinition',
@@ -222,7 +241,7 @@ export const SignupDocument = {
     {
       kind: 'OperationDefinition',
       operation: 'mutation',
-      name: { kind: 'Name', value: 'signup' },
+      name: { kind: 'Name', value: 'Signup' },
       variableDefinitions: [
         {
           kind: 'VariableDefinition',

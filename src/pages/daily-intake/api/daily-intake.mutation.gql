@@ -1,0 +1,6 @@
+mutation CalculateDailyIntake($input: CalculateDailyIntakeInput!) {
+  calculateDailyIntake(input: $input) {
+    dailyCalorieIntake
+    dailyExerciseTime
+  }
+}
