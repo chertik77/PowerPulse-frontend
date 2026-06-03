@@ -1,12 +1,9 @@
-'use client'
+import { Suspense } from 'react'
 
-import { Scoped } from '../lib/form-steps'
 import { StepForm } from './StepForm'
-import { StepIndicator } from './StepIndicator'
 
 export const DailyIntakePage = () => (
-  <Scoped>
+  <Suspense>
     <StepForm />
-    <StepIndicator />
-  </Scoped>
+  </Suspense>
 )

@@ -1,32 +1,17 @@
-import { useStepper } from '../lib/form-steps'
-import { useStepForm } from '../lib/useStepForm'
-import { BodyAttributesFormStep } from './BodyAttributesFormStep'
-import { BodyProfileFormStep } from './BodyProfileFormStep'
-import { StepActions } from './StepActions'
+'use client'
+
+import { Scoped } from '../lib/form-steps'
+import { useStep } from '../lib/useStep'
+import { StepContent } from './StepContent'
+import { StepIndicator } from './StepIndicator'
 
 export const StepForm = () => {
-  const stepper = useStepper()
-
-  const { form, onSubmit, isLoading } = useStepForm()
+  const { step } = useStep()
 
   return (
-    <>
-      <h2 className='tablet:mb-4 tablet:text-3xl mb-3.5 text-2xl font-bold'>
-        {stepper.state.current.data.title}
-      </h2>
-      <p
-        className='tablet:mb-13.5 tablet:w-127.5 tablet:text-md mb-7 text-base
-          text-white/30'>
-        {stepper.state.current.data.description}
-      </p>
-      <form onSubmit={form.handleSubmit(onSubmit)}>
-        {stepper.flow.switch({
-          profile: () => <BodyProfileFormStep control={form.control} />,
-          attributes: () => <BodyAttributesFormStep control={form.control} />,
-          done: () => null
-        })}
-        <StepActions isLoading={isLoading} />
-      </form>
-    </>
+    <Scoped initialStep={step}>
+      <StepContent />
+      <StepIndicator />
+    </Scoped>
   )
 }

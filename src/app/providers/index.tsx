@@ -2,12 +2,14 @@
 
 import type { PropsWithChildren } from 'react'
 
+import { NuqsAdapter } from 'nuqs/adapters/next/app'
+
 import { ApolloClientProvider } from './ApolloClientProvider'
 import { ToastProvider } from './ToastProvider'
 
 export const Providers = ({ children }: PropsWithChildren) => (
   <ApolloClientProvider>
-    {children}
+    <NuqsAdapter>{children}</NuqsAdapter>
     <ToastProvider />
   </ApolloClientProvider>
 )
