@@ -1,18 +1,22 @@
 import { useRouter } from 'next/navigation'
-import { useMutation } from '@apollo/client/react'
+import { useApolloClient, useMutation } from '@apollo/client/react'
 import { toast } from 'sonner'
 
-import { CalculateDailyIntakeDocument } from '@/shared/api'
+import {
+  CalculateDailyIntakeDocument,
+  RefreshTokensDocument
+} from '@/shared/api'
 
-export const useCalculateDailyIntake = (clear: () => void) => {
-  // const apolloClient = useApolloClient()
+export const useCalculateDailyIntake = (clearLS: () => void) => {
+  const apolloClient = useApolloClient()
+
   const { push } = useRouter()
 
   const [mutate, { loading }] = useMutation(CalculateDailyIntakeDocument, {
     onCompleted: async () => {
-      // await apolloClient.mutate({ mutation: RefreshTokensDocument })
-      clear()
-      push('/app')
+      await apolloClient.mutate({ mutation: RefreshTokensDocument })
+      clearLS()
+      push('/app/diary')
     },
     onError() {
       toast.error(

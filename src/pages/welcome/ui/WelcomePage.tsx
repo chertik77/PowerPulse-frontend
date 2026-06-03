@@ -24,7 +24,7 @@ export const WelcomePage = () => (
     </Button>
     <Button
       render={<Link href='/auth/signin' />}
-      variant='secondary'
+      variant='outline'
       nativeButton={false}
       className='tablet:px-15 tablet:py-4 px-10 py-3'>
       Sign In

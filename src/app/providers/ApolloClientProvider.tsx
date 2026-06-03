@@ -1,11 +1,9 @@
 import type { PropsWithChildren } from 'react'
 
-import { ApolloNextAppProvider } from '@apollo/client-integration-nextjs'
+import { ApolloProvider } from '@apollo/client/react'
 
-import { apolloClient } from '@/shared/api'
+import { makeApolloClient } from '@/shared/api'
 
 export const ApolloClientProvider = ({ children }: PropsWithChildren) => (
-  <ApolloNextAppProvider makeClient={() => apolloClient}>
-    {children}
-  </ApolloNextAppProvider>
+  <ApolloProvider client={makeApolloClient()}>{children}</ApolloProvider>
 )

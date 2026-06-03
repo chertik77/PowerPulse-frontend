@@ -11,7 +11,7 @@ export const buttonVariants = cva(
     variants: {
       variant: {
         default: 'bg-orange hocus:bg-coral disabled:text-white/60',
-        secondary:
+        outline:
           'hocus:border-orange border border-white/30 disabled:text-white/60',
         ghost: 'bg-transparent'
       },

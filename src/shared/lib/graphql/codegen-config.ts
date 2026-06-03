@@ -11,7 +11,12 @@ export default {
   generates: {
     'src/shared/api/generated/': {
       preset: 'client',
-      config: { useTypeImports: true }
+      presetConfig: { fragmentMasking: false },
+      config: {
+        useTypeImports: true,
+        nonOptionalTypename: true,
+        skipTypeNameForRoot: true
+      }
     }
   }
 } satisfies CodegenConfig

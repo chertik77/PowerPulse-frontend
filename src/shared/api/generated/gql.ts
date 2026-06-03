@@ -15,23 +15,24 @@ import * as types from './graphql'
  * Learn more about it here: https://the-guild.dev/graphql/codegen/plugins/presets/preset-client#reducing-bundle-size
  */
 type Documents = {
-  'mutation Logout {\n  logout\n}': typeof types.LogoutDocument
+  'fragment MeBasic on User {\n  id\n  name\n  email\n  avatar\n}\n\nfragment MeBody on User {\n  height\n  currentWeight\n  desiredWeight\n  birthday\n  sex\n  blood\n}\n\nfragment MeFitness on User {\n  activityLevel\n  dailyCalorieIntake\n  dailyExerciseTime\n  isDailyIntakeFormCompleted\n}\n\nquery GetMeBasic {\n  me {\n    ...MeBasic\n  }\n}\n\nquery GetMeProfile {\n  me {\n    ...MeBasic\n    ...MeBody\n  }\n}\n\nquery GetMeFitness {\n  me {\n    ...MeFitness\n  }\n}': typeof types.MeBasicFragmentDoc
   'mutation RefreshTokens {\n  refreshTokens\n}': typeof types.RefreshTokensDocument
-  'query GetUser {\n  me {\n    email\n    id\n  }\n}': typeof types.GetUserDocument
   'mutation CalculateDailyIntake($input: CalculateDailyIntakeInput!) {\n  calculateDailyIntake(input: $input) {\n    dailyCalorieIntake\n    dailyExerciseTime\n  }\n}': typeof types.CalculateDailyIntakeDocument
   'mutation Signin($input: SigninInput!) {\n  signin(input: $input)\n}': typeof types.SigninDocument
   'mutation Signup($input: SignupInput!) {\n  signup(input: $input)\n}': typeof types.SignupDocument
+  'mutation Logout {\n  logout\n}': typeof types.LogoutDocument
 }
 const documents: Documents = {
-  'mutation Logout {\n  logout\n}': types.LogoutDocument,
+  'fragment MeBasic on User {\n  id\n  name\n  email\n  avatar\n}\n\nfragment MeBody on User {\n  height\n  currentWeight\n  desiredWeight\n  birthday\n  sex\n  blood\n}\n\nfragment MeFitness on User {\n  activityLevel\n  dailyCalorieIntake\n  dailyExerciseTime\n  isDailyIntakeFormCompleted\n}\n\nquery GetMeBasic {\n  me {\n    ...MeBasic\n  }\n}\n\nquery GetMeProfile {\n  me {\n    ...MeBasic\n    ...MeBody\n  }\n}\n\nquery GetMeFitness {\n  me {\n    ...MeFitness\n  }\n}':
+    types.MeBasicFragmentDoc,
   'mutation RefreshTokens {\n  refreshTokens\n}': types.RefreshTokensDocument,
-  'query GetUser {\n  me {\n    email\n    id\n  }\n}': types.GetUserDocument,
   'mutation CalculateDailyIntake($input: CalculateDailyIntakeInput!) {\n  calculateDailyIntake(input: $input) {\n    dailyCalorieIntake\n    dailyExerciseTime\n  }\n}':
     types.CalculateDailyIntakeDocument,
   'mutation Signin($input: SigninInput!) {\n  signin(input: $input)\n}':
     types.SigninDocument,
   'mutation Signup($input: SignupInput!) {\n  signup(input: $input)\n}':
-    types.SignupDocument
+    types.SignupDocument,
+  'mutation Logout {\n  logout\n}': types.LogoutDocument
 }
 
 /**
@@ -52,20 +53,14 @@ export function graphql(source: string): unknown
  * The graphql function is used to parse GraphQL queries into a document that can be used by GraphQL clients.
  */
 export function graphql(
-  source: 'mutation Logout {\n  logout\n}'
-): (typeof documents)['mutation Logout {\n  logout\n}']
+  source: 'fragment MeBasic on User {\n  id\n  name\n  email\n  avatar\n}\n\nfragment MeBody on User {\n  height\n  currentWeight\n  desiredWeight\n  birthday\n  sex\n  blood\n}\n\nfragment MeFitness on User {\n  activityLevel\n  dailyCalorieIntake\n  dailyExerciseTime\n  isDailyIntakeFormCompleted\n}\n\nquery GetMeBasic {\n  me {\n    ...MeBasic\n  }\n}\n\nquery GetMeProfile {\n  me {\n    ...MeBasic\n    ...MeBody\n  }\n}\n\nquery GetMeFitness {\n  me {\n    ...MeFitness\n  }\n}'
+): (typeof documents)['fragment MeBasic on User {\n  id\n  name\n  email\n  avatar\n}\n\nfragment MeBody on User {\n  height\n  currentWeight\n  desiredWeight\n  birthday\n  sex\n  blood\n}\n\nfragment MeFitness on User {\n  activityLevel\n  dailyCalorieIntake\n  dailyExerciseTime\n  isDailyIntakeFormCompleted\n}\n\nquery GetMeBasic {\n  me {\n    ...MeBasic\n  }\n}\n\nquery GetMeProfile {\n  me {\n    ...MeBasic\n    ...MeBody\n  }\n}\n\nquery GetMeFitness {\n  me {\n    ...MeFitness\n  }\n}']
 /**
  * The graphql function is used to parse GraphQL queries into a document that can be used by GraphQL clients.
  */
 export function graphql(
   source: 'mutation RefreshTokens {\n  refreshTokens\n}'
 ): (typeof documents)['mutation RefreshTokens {\n  refreshTokens\n}']
-/**
- * The graphql function is used to parse GraphQL queries into a document that can be used by GraphQL clients.
- */
-export function graphql(
-  source: 'query GetUser {\n  me {\n    email\n    id\n  }\n}'
-): (typeof documents)['query GetUser {\n  me {\n    email\n    id\n  }\n}']
 /**
  * The graphql function is used to parse GraphQL queries into a document that can be used by GraphQL clients.
  */
@@ -84,6 +79,12 @@ export function graphql(
 export function graphql(
   source: 'mutation Signup($input: SignupInput!) {\n  signup(input: $input)\n}'
 ): (typeof documents)['mutation Signup($input: SignupInput!) {\n  signup(input: $input)\n}']
+/**
+ * The graphql function is used to parse GraphQL queries into a document that can be used by GraphQL clients.
+ */
+export function graphql(
+  source: 'mutation Logout {\n  logout\n}'
+): (typeof documents)['mutation Logout {\n  logout\n}']
 
 export function graphql(source: string) {
   return (documents as any)[source] ?? {}

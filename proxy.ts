@@ -36,7 +36,7 @@ export const proxy = async (req: NextRequest) => {
 
   // Fully authenticated
   if (isAuth || isIntake || isHome) {
-    return NextResponse.redirect(new URL('/app', req.url))
+    return NextResponse.redirect(new URL('/app/diary', req.url))
   }
 
   return NextResponse.next()

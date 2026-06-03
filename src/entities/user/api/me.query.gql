@@ -1,0 +1,41 @@
+fragment MeBasic on User {
+  id
+  name
+  email
+  avatar
+}
+
+fragment MeBody on User {
+  height
+  currentWeight
+  desiredWeight
+  birthday
+  sex
+  blood
+}
+
+fragment MeFitness on User {
+  activityLevel
+  dailyCalorieIntake
+  dailyExerciseTime
+  isDailyIntakeFormCompleted
+}
+
+query GetMeBasic {
+  me {
+    ...MeBasic
+  }
+}
+
+query GetMeProfile {
+  me {
+    ...MeBasic
+    ...MeBody
+  }
+}
+
+query GetMeFitness {
+  me {
+    ...MeFitness
+  }
+}

@@ -35,17 +35,66 @@ export type SignupInput = {
   password: string
 }
 
-export type LogoutMutationVariables = Exact<{ [key: string]: never }>
+export type MeBasicFragment = {
+  id: string
+  name: string
+  email: string
+  avatar: string | null
+}
 
-export type LogoutMutation = { logout: boolean }
+export type MeBodyFragment = {
+  height: number | null
+  currentWeight: number | null
+  desiredWeight: number | null
+  birthday: unknown
+  sex: Sex | null
+  blood: Blood | null
+}
+
+export type MeFitnessFragment = {
+  activityLevel: number | null
+  dailyCalorieIntake: number | null
+  dailyExerciseTime: number
+  isDailyIntakeFormCompleted: boolean
+}
+
+export type GetMeBasicQueryVariables = Exact<{ [key: string]: never }>
+
+export type GetMeBasicQuery = {
+  me: { id: string; name: string; email: string; avatar: string | null }
+}
+
+export type GetMeProfileQueryVariables = Exact<{ [key: string]: never }>
+
+export type GetMeProfileQuery = {
+  me: {
+    id: string
+    name: string
+    email: string
+    avatar: string | null
+    height: number | null
+    currentWeight: number | null
+    desiredWeight: number | null
+    birthday: unknown
+    sex: Sex | null
+    blood: Blood | null
+  }
+}
+
+export type GetMeFitnessQueryVariables = Exact<{ [key: string]: never }>
+
+export type GetMeFitnessQuery = {
+  me: {
+    activityLevel: number | null
+    dailyCalorieIntake: number | null
+    dailyExerciseTime: number
+    isDailyIntakeFormCompleted: boolean
+  }
+}
 
 export type RefreshTokensMutationVariables = Exact<{ [key: string]: never }>
 
 export type RefreshTokensMutation = { refreshTokens: boolean }
-
-export type GetUserQueryVariables = Exact<{ [key: string]: never }>
-
-export type GetUserQuery = { me: { email: string; id: string } }
 
 export type CalculateDailyIntakeMutationVariables = Exact<{
   input: CalculateDailyIntakeInput
@@ -70,20 +119,248 @@ export type SignupMutationVariables = Exact<{
 
 export type SignupMutation = { signup: boolean }
 
-export const LogoutDocument = {
+export type LogoutMutationVariables = Exact<{ [key: string]: never }>
+
+export type LogoutMutation = { logout: boolean }
+
+export const MeBasicFragmentDoc = {
+  kind: 'Document',
+  definitions: [
+    {
+      kind: 'FragmentDefinition',
+      name: { kind: 'Name', value: 'MeBasic' },
+      typeCondition: {
+        kind: 'NamedType',
+        name: { kind: 'Name', value: 'User' }
+      },
+      selectionSet: {
+        kind: 'SelectionSet',
+        selections: [
+          { kind: 'Field', name: { kind: 'Name', value: 'id' } },
+          { kind: 'Field', name: { kind: 'Name', value: 'name' } },
+          { kind: 'Field', name: { kind: 'Name', value: 'email' } },
+          { kind: 'Field', name: { kind: 'Name', value: 'avatar' } }
+        ]
+      }
+    }
+  ]
+} as unknown as DocumentNode<MeBasicFragment, unknown>
+export const MeBodyFragmentDoc = {
+  kind: 'Document',
+  definitions: [
+    {
+      kind: 'FragmentDefinition',
+      name: { kind: 'Name', value: 'MeBody' },
+      typeCondition: {
+        kind: 'NamedType',
+        name: { kind: 'Name', value: 'User' }
+      },
+      selectionSet: {
+        kind: 'SelectionSet',
+        selections: [
+          { kind: 'Field', name: { kind: 'Name', value: 'height' } },
+          { kind: 'Field', name: { kind: 'Name', value: 'currentWeight' } },
+          { kind: 'Field', name: { kind: 'Name', value: 'desiredWeight' } },
+          { kind: 'Field', name: { kind: 'Name', value: 'birthday' } },
+          { kind: 'Field', name: { kind: 'Name', value: 'sex' } },
+          { kind: 'Field', name: { kind: 'Name', value: 'blood' } }
+        ]
+      }
+    }
+  ]
+} as unknown as DocumentNode<MeBodyFragment, unknown>
+export const MeFitnessFragmentDoc = {
+  kind: 'Document',
+  definitions: [
+    {
+      kind: 'FragmentDefinition',
+      name: { kind: 'Name', value: 'MeFitness' },
+      typeCondition: {
+        kind: 'NamedType',
+        name: { kind: 'Name', value: 'User' }
+      },
+      selectionSet: {
+        kind: 'SelectionSet',
+        selections: [
+          { kind: 'Field', name: { kind: 'Name', value: 'activityLevel' } },
+          {
+            kind: 'Field',
+            name: { kind: 'Name', value: 'dailyCalorieIntake' }
+          },
+          { kind: 'Field', name: { kind: 'Name', value: 'dailyExerciseTime' } },
+          {
+            kind: 'Field',
+            name: { kind: 'Name', value: 'isDailyIntakeFormCompleted' }
+          }
+        ]
+      }
+    }
+  ]
+} as unknown as DocumentNode<MeFitnessFragment, unknown>
+export const GetMeBasicDocument = {
   kind: 'Document',
   definitions: [
     {
       kind: 'OperationDefinition',
-      operation: 'mutation',
-      name: { kind: 'Name', value: 'Logout' },
+      operation: 'query',
+      name: { kind: 'Name', value: 'GetMeBasic' },
       selectionSet: {
         kind: 'SelectionSet',
-        selections: [{ kind: 'Field', name: { kind: 'Name', value: 'logout' } }]
+        selections: [
+          {
+            kind: 'Field',
+            name: { kind: 'Name', value: 'me' },
+            selectionSet: {
+              kind: 'SelectionSet',
+              selections: [
+                {
+                  kind: 'FragmentSpread',
+                  name: { kind: 'Name', value: 'MeBasic' }
+                }
+              ]
+            }
+          }
+        ]
+      }
+    },
+    {
+      kind: 'FragmentDefinition',
+      name: { kind: 'Name', value: 'MeBasic' },
+      typeCondition: {
+        kind: 'NamedType',
+        name: { kind: 'Name', value: 'User' }
+      },
+      selectionSet: {
+        kind: 'SelectionSet',
+        selections: [
+          { kind: 'Field', name: { kind: 'Name', value: 'id' } },
+          { kind: 'Field', name: { kind: 'Name', value: 'name' } },
+          { kind: 'Field', name: { kind: 'Name', value: 'email' } },
+          { kind: 'Field', name: { kind: 'Name', value: 'avatar' } }
+        ]
       }
     }
   ]
-} as unknown as DocumentNode<LogoutMutation, LogoutMutationVariables>
+} as unknown as DocumentNode<GetMeBasicQuery, GetMeBasicQueryVariables>
+export const GetMeProfileDocument = {
+  kind: 'Document',
+  definitions: [
+    {
+      kind: 'OperationDefinition',
+      operation: 'query',
+      name: { kind: 'Name', value: 'GetMeProfile' },
+      selectionSet: {
+        kind: 'SelectionSet',
+        selections: [
+          {
+            kind: 'Field',
+            name: { kind: 'Name', value: 'me' },
+            selectionSet: {
+              kind: 'SelectionSet',
+              selections: [
+                {
+                  kind: 'FragmentSpread',
+                  name: { kind: 'Name', value: 'MeBasic' }
+                },
+                {
+                  kind: 'FragmentSpread',
+                  name: { kind: 'Name', value: 'MeBody' }
+                }
+              ]
+            }
+          }
+        ]
+      }
+    },
+    {
+      kind: 'FragmentDefinition',
+      name: { kind: 'Name', value: 'MeBasic' },
+      typeCondition: {
+        kind: 'NamedType',
+        name: { kind: 'Name', value: 'User' }
+      },
+      selectionSet: {
+        kind: 'SelectionSet',
+        selections: [
+          { kind: 'Field', name: { kind: 'Name', value: 'id' } },
+          { kind: 'Field', name: { kind: 'Name', value: 'name' } },
+          { kind: 'Field', name: { kind: 'Name', value: 'email' } },
+          { kind: 'Field', name: { kind: 'Name', value: 'avatar' } }
+        ]
+      }
+    },
+    {
+      kind: 'FragmentDefinition',
+      name: { kind: 'Name', value: 'MeBody' },
+      typeCondition: {
+        kind: 'NamedType',
+        name: { kind: 'Name', value: 'User' }
+      },
+      selectionSet: {
+        kind: 'SelectionSet',
+        selections: [
+          { kind: 'Field', name: { kind: 'Name', value: 'height' } },
+          { kind: 'Field', name: { kind: 'Name', value: 'currentWeight' } },
+          { kind: 'Field', name: { kind: 'Name', value: 'desiredWeight' } },
+          { kind: 'Field', name: { kind: 'Name', value: 'birthday' } },
+          { kind: 'Field', name: { kind: 'Name', value: 'sex' } },
+          { kind: 'Field', name: { kind: 'Name', value: 'blood' } }
+        ]
+      }
+    }
+  ]
+} as unknown as DocumentNode<GetMeProfileQuery, GetMeProfileQueryVariables>
+export const GetMeFitnessDocument = {
+  kind: 'Document',
+  definitions: [
+    {
+      kind: 'OperationDefinition',
+      operation: 'query',
+      name: { kind: 'Name', value: 'GetMeFitness' },
+      selectionSet: {
+        kind: 'SelectionSet',
+        selections: [
+          {
+            kind: 'Field',
+            name: { kind: 'Name', value: 'me' },
+            selectionSet: {
+              kind: 'SelectionSet',
+              selections: [
+                {
+                  kind: 'FragmentSpread',
+                  name: { kind: 'Name', value: 'MeFitness' }
+                }
+              ]
+            }
+          }
+        ]
+      }
+    },
+    {
+      kind: 'FragmentDefinition',
+      name: { kind: 'Name', value: 'MeFitness' },
+      typeCondition: {
+        kind: 'NamedType',
+        name: { kind: 'Name', value: 'User' }
+      },
+      selectionSet: {
+        kind: 'SelectionSet',
+        selections: [
+          { kind: 'Field', name: { kind: 'Name', value: 'activityLevel' } },
+          {
+            kind: 'Field',
+            name: { kind: 'Name', value: 'dailyCalorieIntake' }
+          },
+          { kind: 'Field', name: { kind: 'Name', value: 'dailyExerciseTime' } },
+          {
+            kind: 'Field',
+            name: { kind: 'Name', value: 'isDailyIntakeFormCompleted' }
+          }
+        ]
+      }
+    }
+  ]
+} as unknown as DocumentNode<GetMeFitnessQuery, GetMeFitnessQueryVariables>
 export const RefreshTokensDocument = {
   kind: 'Document',
   definitions: [
@@ -103,32 +380,6 @@ export const RefreshTokensDocument = {
   RefreshTokensMutation,
   RefreshTokensMutationVariables
 >
-export const GetUserDocument = {
-  kind: 'Document',
-  definitions: [
-    {
-      kind: 'OperationDefinition',
-      operation: 'query',
-      name: { kind: 'Name', value: 'GetUser' },
-      selectionSet: {
-        kind: 'SelectionSet',
-        selections: [
-          {
-            kind: 'Field',
-            name: { kind: 'Name', value: 'me' },
-            selectionSet: {
-              kind: 'SelectionSet',
-              selections: [
-                { kind: 'Field', name: { kind: 'Name', value: 'email' } },
-                { kind: 'Field', name: { kind: 'Name', value: 'id' } }
-              ]
-            }
-          }
-        ]
-      }
-    }
-  ]
-} as unknown as DocumentNode<GetUserQuery, GetUserQueryVariables>
 export const CalculateDailyIntakeDocument = {
   kind: 'Document',
   definitions: [
@@ -280,3 +531,17 @@ export const SignupDocument = {
     }
   ]
 } as unknown as DocumentNode<SignupMutation, SignupMutationVariables>
+export const LogoutDocument = {
+  kind: 'Document',
+  definitions: [
+    {
+      kind: 'OperationDefinition',
+      operation: 'mutation',
+      name: { kind: 'Name', value: 'Logout' },
+      selectionSet: {
+        kind: 'SelectionSet',
+        selections: [{ kind: 'Field', name: { kind: 'Name', value: 'logout' } }]
+      }
+    }
+  ]
+} as unknown as DocumentNode<LogoutMutation, LogoutMutationVariables>

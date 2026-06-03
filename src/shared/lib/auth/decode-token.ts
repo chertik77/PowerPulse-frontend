@@ -1,9 +1,15 @@
-import { decodeJwt } from 'jose/jwt/decode'
+import type { JwtPayload } from 'jwt-decode'
+
+import { jwtDecode } from 'jwt-decode'
+
+type Payload = JwtPayload & {
+  isDailyIntakeFormCompleted: boolean
+}
 
 export const decodeToken = (token: string | undefined) => {
   if (!token) return null
 
-  const payload = decodeJwt(token)
+  const payload = jwtDecode<Payload>(token)
 
   return payload
 }
